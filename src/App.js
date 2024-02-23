@@ -1,28 +1,41 @@
 import "./App.css";
+import { useState, useEffect } from "react";
 import SignupForm from "./Components/SignupForm";
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBvfI765RzQerwARKTJwziACEhKtAt03Cg",
-  authDomain: "expenses-tracker-2f825.firebaseapp.com",
-  projectId: "expenses-tracker-2f825",
-  storageBucket: "expenses-tracker-2f825.appspot.com",
-  messagingSenderId: "241432493087",
-  appId: "1:241432493087:web:9e45793d4e2586c131a92a",
-  measurementId: "G-77E9SZ69CK",
-};
-
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+import SignIn from "./Components/SignIn";
+import WelcomePage from "./Components/Welcome";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function App() {
+  const [user, setUser] = useState(null);
+  const [isNewUser, setIsNewUser] = useState(false);
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleSignUp = () => {
+    setIsNewUser(true);
+  };
+
+  const handleSignIn = () => {
+    setIsNewUser(false);
+  };
+
   return (
     <div>
-      <h1>
-        <strong>Sign Up Page</strong>
-      </h1>
-      <SignupForm />
+      <h1>Welcome to My App</h1>
+      {user ? (
+        <WelcomePage user={user} />
+      ) : isNewUser ? (
+        <SignupForm onSignIn={handleSignIn} />
+      ) : (
+        <SignIn onSignUp={handleSignUp} />
+      )}
     </div>
   );
 }
