@@ -1,10 +1,28 @@
-import React, { useState } from "react";
-import { updateUserProfile } from "../Auth";
+import React, { useState, useEffect } from "react";
+import { updateUserProfile, getUserProfile } from "../Auth";
 
 const ProfileCompletionPage = () => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+
+  useEffect(() => {
+    // Fetch user profile data from Firebase upon component mount
+    const fetchUserProfileData = async () => {
+      try {
+        const userProfileData = await getUserProfile();
+        if (userProfileData) {
+          setName(userProfileData.name || "");
+          setAddress(userProfileData.address || "");
+          setPhoneNumber(userProfileData.phoneNumber || "");
+        }
+      } catch (error) {
+        console.error("Error fetching user profile data:", error);
+      }
+    };
+
+    fetchUserProfileData();
+  }, []);
 
   const handleUpdateProfile = async () => {
     try {

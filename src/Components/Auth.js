@@ -6,6 +6,22 @@ const updateUserProfile = (user, profileData) => {
   // Update the user's profile
   return updateProfile(user, profileData);
 };
+
+const getUserProfile = async (user) => {
+  try {
+    // Fetch the user's profile data from your Firebase database or Firestore
+    // You need to implement this function based on your database structure
+    // For example:
+    // const userProfileRef = doc(db, "users", user.uid);
+    // const userProfileSnap = await getDoc(userProfileRef);
+    // return userProfileSnap.data();
+    return {}; // Placeholder until implemented
+  } catch (error) {
+    console.error("Error fetching user profile:", error);
+    throw error;
+  }
+};
+
 const firebaseConfig = {
   apiKey: "AIzaSyBvfI765RzQerwARKTJwziACEhKtAt03Cg",
   authDomain: "expenses-tracker-2f825.firebaseapp.com",
@@ -19,5 +35,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
-export { updateUserProfile };
+export { updateUserProfile, getUserProfile };
 export default auth;
