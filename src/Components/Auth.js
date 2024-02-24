@@ -1,7 +1,11 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, updateProfile } from "firebase/auth";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const updateUserProfile = (user, profileData) => {
+  // Update the user's profile
+  return updateProfile(user, profileData);
+};
 const firebaseConfig = {
   apiKey: "AIzaSyBvfI765RzQerwARKTJwziACEhKtAt03Cg",
   authDomain: "expenses-tracker-2f825.firebaseapp.com",
@@ -15,4 +19,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
+export { updateUserProfile };
 export default auth;
