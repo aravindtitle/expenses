@@ -1,10 +1,20 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, updateProfile } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+  sendEmailVerification,
+} from "firebase/auth";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const updateUserProfile = (user, profileData) => {
-  // Update the user's profile
-  return updateProfile(user, profileData);
+const updateUserProfile = async (user, profileData) => {
+  try {
+    await updateProfile(user, profileData);
+    console.log("User profile updated successfully");
+  } catch (error) {
+    console.error("Error updating user profile:", error.message);
+    throw error;
+  }
 };
 
 const getUserProfile = async (user) => {
@@ -18,6 +28,21 @@ const getUserProfile = async (user) => {
     return {}; // Placeholder until implemented
   } catch (error) {
     console.error("Error fetching user profile:", error);
+    throw error;
+  }
+};
+const createUserWithEmail = async (email, password) => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    await sendEmailVerification(auth.currentUser);
+    console.log("Verification email sent successfully");
+    return userCredential.user;
+  } catch (error) {
+    console.error("Error creating user:", error.message);
     throw error;
   }
 };
@@ -35,5 +60,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
-export { updateUserProfile, getUserProfile };
+export { updateUserProfile, getUserProfile, createUserWithEmail };
 export default auth;
