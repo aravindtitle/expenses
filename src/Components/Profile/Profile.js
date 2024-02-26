@@ -68,6 +68,7 @@ const ProfileCompletionPage = () => {
         </div>
         <button type="submit">Update</button>
       </form>
+      <VerifyEmailButton /> {/* Render the VerifyEmailButton component */}
     </div>
   );
 };
