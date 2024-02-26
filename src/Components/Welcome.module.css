@@ -1,0 +1,11 @@
+.welcome {
+    position: relative;
+  }
+  
+  .logout {
+    position: absolute;
+    top: 5px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+   
+  }
+  

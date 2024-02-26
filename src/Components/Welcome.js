@@ -1,6 +1,7 @@
 import React from "react";
 import { getAuth, signOut } from "firebase/auth";
 import VerifyEmailButton from "./Profile/VerifyButton";
+import classes from "./Welcome.module.css";
 
 const WelcomePage = ({ user }) => {
   const handleLogout = () => {
@@ -8,6 +9,8 @@ const WelcomePage = ({ user }) => {
     signOut(auth)
       .then(() => {
         // Log out successful, you may want to redirect the user to the login page
+        // Clear idToken from local storage
+        localStorage.removeItem("idToken");
       })
       .catch((error) => {
         console.error("Error signing out:", error);
@@ -15,11 +18,13 @@ const WelcomePage = ({ user }) => {
   };
 
   return (
-    <div>
+    <div className={classes.welcome}>
       <h2>Welcome back, {user.email}!</h2>
       <p>Welcome to Expense Tracker.</p>
       {!user.emailVerified && <VerifyEmailButton />}
-      <button onClick={handleLogout}>Logout</button>
+      <button onClick={handleLogout} className={classes.logout}>
+        Logout
+      </button>
     </div>
   );
 };
