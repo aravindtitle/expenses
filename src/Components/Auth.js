@@ -56,9 +56,23 @@ const firebaseConfig = {
   appId: "1:241432493087:web:9e45793d4e2586c131a92a",
   measurementId: "G-77E9SZ69CK",
 };
+const sendPasswordResetEmail = async (email) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    console.log("Password reset email sent successfully");
+  } catch (error) {
+    console.error("Error sending password reset email:", error.message);
+    throw error;
+  }
+};
 
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
-export { updateUserProfile, getUserProfile, createUserWithEmail };
+export {
+  updateUserProfile,
+  getUserProfile,
+  createUserWithEmail,
+  sendPasswordResetEmail,
+};
 export default auth;
