@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import VerifyEmailButton from "./Profile/VerifyButton";
 import classes from "./Welcome.module.css";
+import ExpenseForm from "./Expenses/ExpenseForm";
+import ExpenseList from "./Expenses/ExpenseList";
 
 const WelcomePage = ({ user }) => {
+  const [isProfileCompleted, setIsProfileCompleted] = useState(false);
+
+  useEffect(() => {
+    // Logic to check if profile is completed
+    const checkProfileCompletion = () => {
+      // Implement your logic to check if the profile is completed
+      // For example, you can fetch user data and check if the necessary fields are filled
+      // If profile is completed, update state
+      setIsProfileCompleted(true);
+    };
+
+    checkProfileCompletion();
+  }, []);
+
   const handleLogout = () => {
     const auth = getAuth();
     signOut(auth)
@@ -25,6 +41,14 @@ const WelcomePage = ({ user }) => {
       <button onClick={handleLogout} className={classes.logout}>
         Logout
       </button>
+      {isProfileCompleted ? (
+        <>
+          <ExpenseForm />
+          <ExpenseList />
+        </>
+      ) : (
+        <p>Your profile is already complete.</p>
+      )}
     </div>
   );
 };
