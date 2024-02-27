@@ -6,11 +6,11 @@ const ExpenseList = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch expenses data from API or database
     const fetchExpenses = async () => {
       try {
-        // Replace this with your actual data fetching logic
-        const response = await fetch("your-api-url");
+        const response = await fetch(
+          "https://crudcrud.com/api/5b0f32236bb8476281a0778b34ea06df/expenses"
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch expenses");
         }
@@ -25,10 +25,6 @@ const ExpenseList = () => {
 
     fetchExpenses();
   }, []);
-
-  const handleAddExpense = (expense) => {
-    setExpenses([...expenses, expense]);
-  };
 
   if (loading) {
     return <div>Loading...</div>;
