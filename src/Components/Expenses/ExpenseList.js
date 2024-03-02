@@ -10,7 +10,7 @@ const ExpenseList = () => {
     const fetchExpenses = async () => {
       try {
         const response = await fetch(
-          "https://crudcrud.com/api/5b0f32236bb8476281a0778b34ea06df/expenses"
+          "https://crudcrud.com/api/9f993efc18c847afb146660d8cad35eb/expenses"
         );
         if (!response.ok) {
           throw new Error("Failed to fetch expenses");
@@ -53,7 +53,7 @@ const ExpenseList = () => {
   const handleEditSubmit = async (updatedExpense) => {
     try {
       const response = await fetch(
-        `https://crudcrud.com/api/5b0f32236bb8476281a0778b34ea06df/expenses/${updatedExpense._id}`,
+        `https://crudcrud.com/api/5aa35e9789924bb7931b239ad25ee072/expenses/${updatedExpense._id}`,
         {
           method: "PUT",
           headers: {

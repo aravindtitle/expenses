@@ -5,8 +5,10 @@ import VerifyEmailButton from "./Profile/VerifyButton";
 import classes from "./Welcome.module.css";
 import ExpenseForm from "./Expenses/ExpenseForm";
 import ExpenseList from "./Expenses/ExpenseList";
+import { useState } from "react";
 
 const WelcomePage = ({ user }) => {
+  const [expenses, setExpenses] = useState([]);
   const handleLogout = () => {
     const auth = getAuth();
     signOut(auth)
@@ -17,6 +19,9 @@ const WelcomePage = ({ user }) => {
         console.error("Error signing out:", error);
       });
   };
+  const handleAddExpense = (newExpense) => {
+    setExpenses([...expenses, newExpense]);
+  };
 
   return (
     <div className={classes.welcome}>
@@ -26,7 +31,7 @@ const WelcomePage = ({ user }) => {
       <button onClick={handleLogout} className={classes.logout}>
         Logout
       </button>
-      <ExpenseForm />
+      <ExpenseForm onAddExpense={handleAddExpense} />
       <ExpenseList />
     </div>
   );
