@@ -11,7 +11,7 @@ const ExpenseForm = ({ onAddExpense }) => {
 
     try {
       const response = await fetch(
-        "https://crudcrud.com/api/bf4464860dca47d69843d7015be8d57b/expenses",
+        "https://crudcrud.com/api/fdacd626e5b34b77b3d4efde1a81d902/expenses",
         {
           method: "POST",
           headers: {

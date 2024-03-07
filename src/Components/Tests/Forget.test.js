@@ -3,6 +3,6 @@ import SignIn from "../SignIn";
 
 test("renders Forgot Password as a text", () => {
   render(<SignIn />);
-  const forgetpasswordelement = screen.getByText("Forgot Password");
-  expect(forgetpasswordelement).toBeInTheDocument();
+  const forgetpasswordElement = screen.getByText("Forgot Password");
+  expect(forgetpasswordElement).toBeInTheDocument();
 });
